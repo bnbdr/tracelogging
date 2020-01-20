@@ -95,5 +95,19 @@ class TestFieldMetadata(BaseTest):
         self.assertEqual(buf, bytes(nm, encoding='utf-8')+b'\0'+tb)
 
 
+class TestEventPack(BaseTest):
+    def test_pack_only_args(self):
+        em = tracelogging.EventMetadata(
+            'my_event_name', [tracelogging.EtwInt32('myint')])
+        buf = em.pack(123)
+        self.assertEqual(buf, b'\x7b\x00\x00\x00')
+
+    def test_pack_only_kwargs(self):
+        em = tracelogging.EventMetadata(
+            'my_event_name', [tracelogging.EtwInt32('myint')])
+        buf = em.pack(myint=123)
+        self.assertEqual(buf, b'\x7b\x00\x00\x00')
+
+
 if __name__ == '__main__':
     unittest.main(failfast=True)

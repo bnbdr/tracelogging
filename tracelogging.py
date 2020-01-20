@@ -441,16 +441,19 @@ class EventMetadata(object):
 
     def pack(self, *args, **kwargs) -> bytes:
         buf = b''
-        for idx, a in enumerate(args):
+        idx = 0
+
+        for a in args:
             f = self.fields[idx]
             l.debug(f'packing field number {idx}: {f.name}')
             buf += f.pack(a)
+            idx += 1
 
         if kwargs:
             l.debug('checking for missing args')
             # kwargs will always be populated if defaults were given in definition-
             # even if enough arguments were provided, in that case iterator will be empty.
-            for f in self.fields[idx+1:]:
+            for f in self.fields[idx:]:
                 l.debug(f'looking up value for field {f.name}')
                 if not f.name in kwargs:
                     l.error(f'missing value for field {f.name}')
