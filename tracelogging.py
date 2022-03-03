@@ -163,12 +163,12 @@ advapi.EventSetInformation.argtypes = [
 ]
 
 
-advapi.EventProviderEnabled.restype = c_ulong
+advapi.EventProviderEnabled.restype = c_bool
 advapi.EventProviderEnabled.argtypes = [
     c_ulonglong, c_uint8, c_ulonglong
 ]
 
-advapi.EventEnabled.restype = c_ulong
+advapi.EventEnabled.restype = c_bool
 advapi.EventEnabled.argtypes = [
     c_ulonglong, POINTER(EVENT_DESCRIPTOR)
 ]
@@ -750,6 +750,6 @@ def getLogger(name):
     return ProviderDefinition(name, (LoggingMockBase,), {})()
 
 
-version = (0, 1, 3)
+version = (0, 1, 4)
 __all__ = ['version', 'Provider', 'event',
            'traceevent_guid_from_name', 'Types', 'getLogger']
