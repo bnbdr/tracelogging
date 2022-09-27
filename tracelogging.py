@@ -750,6 +750,6 @@ def getLogger(name):
     return ProviderDefinition(name, (LoggingMockBase,), {})()
 
 
-version = (0, 1, 4)
+version = (0, 1, 5)
 __all__ = ['version', 'Provider', 'event',
            'traceevent_guid_from_name', 'Types', 'getLogger']
